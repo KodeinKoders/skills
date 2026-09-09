@@ -1,0 +1,10 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "kodein",
+  "description": "Kodein Koders' Claude Code skills: Kotlin, Kotlin Multiplatform and Kodein ecosystem expertise, packaged as installable plugins",
+  "owner": {
+    "name": "Kodein Koders",
+    "url": "https://kodein.net"
+  },
+  "plugins": []
+}
