@@ -6,5 +6,21 @@
     "name": "Kodein Koders",
     "url": "https://kodein.net"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "asciidoc",
+      "description": "Kodein's house rules for writing and structuring AsciiDoc documentation",
+      "source": "./plugins/asciidoc",
+      "version": "0.1.0",
+      "category": "documentation",
+      "license": "MIT",
+      "tags": [
+        "asciidoc",
+        "asciidoctor",
+        "antora",
+        "documentation",
+        "writing"
+      ]
+    }
+  ]
 }

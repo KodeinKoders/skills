@@ -1,0 +1,12 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "asciidoc",
+  "version": "0.1.0",
+  "description": "Kodein's house rules for writing and structuring AsciiDoc documentation",
+  "author": {
+    "name": "Kodein Koders",
+    "url": "https://kodein.net"
+  },
+  "license": "MIT",
+  "skills": ["./skills"]
+}

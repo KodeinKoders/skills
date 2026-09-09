@@ -29,13 +29,13 @@ Useful commands:
 
 ## Available plugins
 
-No plugins published yet. See [CONTRIBUTING.md](CONTRIBUTING.md) to add the first one.
-
 <!-- Keep this table in sync with .claude-plugin/marketplace.json -->
 
 | Plugin | Description |
 | --- | --- |
-| _(none yet)_ | |
+| [`asciidoc`](plugins/asciidoc) | Kodein's house rules for writing and structuring AsciiDoc documentation |
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to add another.
 
 ## Repository layout
 
