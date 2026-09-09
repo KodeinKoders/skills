@@ -56,4 +56,4 @@ may hold several related skills.
 
 ## License
 
-TODO: add a `LICENSE` file.
+[MIT](LICENSE) © Kodein Koders

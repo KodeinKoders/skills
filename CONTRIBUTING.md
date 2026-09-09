@@ -21,6 +21,7 @@ mkdir -p plugins/<topic>/.claude-plugin plugins/<topic>/skills
     "name": "Kodein Koders",
     "url": "https://kodein.net"
   },
+  "license": "MIT",
   "skills": ["./skills"]
 }
 ```
@@ -59,6 +60,7 @@ Add an entry to the `plugins` array in `.claude-plugin/marketplace.json`:
   "source": "./plugins/<topic>",
   "version": "0.1.0",
   "category": "development",
+  "license": "MIT",
   "tags": ["kotlin", "..."]
 }
 ```
