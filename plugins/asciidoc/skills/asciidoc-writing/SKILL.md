@@ -50,6 +50,46 @@ The function takes no arguments.
 Mark an introductory paragraph with `[.lead]` when the document needs a summary line
 under its title.
 
+## Inline formatting: single vs doubled markers
+
+A single marker (`` ` ``, `*`, `_`, `#`) is **constrained**: Asciidoctor only recognises
+it at a word boundary. Doubling it (```` `` ````, `**`, `__`, `##`) makes it
+**unconstrained**, which works anywhere. Double the marker whenever the formatted span
+touches a word character or a quote.
+
+```adoc
+`Header`'s option          // BROKEN — renders as `Header's, backtick left visible
+``Header``'s option        // correct
+
+`Bean`s are cheap          // BROKEN — renders literally
+``Bean``s are cheap        // correct
+
+un`mid`believable          // BROKEN
+un``mid``believable        // correct
+```
+
+When to double — the marker must **not** sit directly against:
+
+| Side | Forbidden neighbour |
+| --- | --- |
+| After the closing marker | a letter, a digit, or `_` |
+| Before the opening marker | a letter, a digit, `_`, `:`, `;`, `}`, `&`, `<`, `>` |
+
+The backtick has one extra trap on **both** sides: `'` and `"`. `` `' `` and `` `" `` are
+Asciidoctor's curly-quote syntax, so `` `Header`'s `` is parsed as a smart apostrophe and
+the backtick survives into the output. This is why a possessive after inline code always
+needs `` ``Header``'s ``, while `*Bold*'s` and `_Ital_'s` are fine as single markers.
+
+Two more consequences:
+
+- Whitespace directly inside a single-marker pair is never recognised (`` ` x` ``). The
+  doubled form accepts it, but trim the span instead.
+- A preceding `\` escapes the marker; doubling does not override that.
+
+Default to the single form. Reach for the doubled one for possessives, plurals and
+mid-word fragments — that is the whole of it in practice.
+
+
 ## Headings
 
 - `=` document title, `==` section, `===` subsection, `====` sub-subsection.

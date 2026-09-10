@@ -118,6 +118,28 @@ NOTE: The helper dependency must be active.
 ----
 
 
+== Doubled (unconstrained) inline markers
+
+Needed when the formatted span touches a word character, or — for backticks only — a
+quote character.
+
+[source,adoc]
+----
+The ``Header``'s value is read once.      // possessive after inline code
+Register your ``Bean``s in a module.      // plural after inline code
+That is un``believ``able.                 // fragment inside a word
+The **Bold**s and __Ital__s also need it. // same rule, other markers
+----
+
+Single markers are correct everywhere else:
+
+[source,adoc]
+----
+The `Header` value, the `Header`. and (`Header`) are all fine.
+*Bold*'s and _Ital_'s are fine — only backticks collide with quotes.
+----
+
+
 == Cross-references
 
 [source,adoc]
