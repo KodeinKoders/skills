@@ -34,6 +34,7 @@ Useful commands:
 | Plugin | Description |
 | --- | --- |
 | [`asciidoc`](plugins/asciidoc) | Kodein's house rules for writing and structuring AsciiDoc documentation |
+| [`code-review`](plugins/code-review) | Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fixed one commit at a time |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) to add another.
 

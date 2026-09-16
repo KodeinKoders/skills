@@ -1,0 +1,64 @@
+= Resolving an ISSUES.adoc entry: before and after
+:icons: font
+
+A worked example of §3 of `SKILL.md`: what one entry looks like while it is pending, and
+what the same entry looks like once its fix has been committed.
+
+
+== Pending
+
+[source,adoc]
+------
+[#D3]
+=== D3. `updateReminder` opens a second DB transaction while already inside one.
+
+`ReminderService.updateReminder` calls `db.transaction { ... }` at line 142, but
+its only caller (`ReminderTools.reschedule`) already wraps the call in its own
+`db.transaction`. Exposed nests transactions as savepoints, so this mostly works,
+but a partial failure inside the inner block only rolls back to the savepoint,
+silently committing the outer transaction's other writes. Drop the inner
+`db.transaction` wrapper and rely on the caller's.
+------
+
+
+== Fixed and committed
+
+The anchor and the heading text are unchanged; the heading is wrapped in the
+`line-through` role, the original description moves verbatim into `.Issue`, and `.Fix`
+records what was actually implemented.
+
+[source,adoc]
+------
+[#D3]
+=== [.line-through]#D3. `updateReminder` opens a second DB transaction while already inside one.#
+
+.Issue
+[%collapsible]
+====
+`ReminderService.updateReminder` calls `db.transaction { ... }` at line 142, but
+its only caller (`ReminderTools.reschedule`) already wraps the call in its own
+`db.transaction`. Exposed nests transactions as savepoints, so this mostly works,
+but a partial failure inside the inner block only rolls back to the savepoint,
+silently committing the outer transaction's other writes. Drop the inner
+`db.transaction` wrapper and rely on the caller's.
+====
+
+.Fix
+[%collapsible]
+====
+Dropped the inner `db.transaction` wrapper from `updateReminder`, which now runs in
+whatever transaction its caller opened. Added `ReminderServiceTest.updateRollsBackWithCaller`
+to pin the behaviour: a failure inside the update now rolls the caller's other writes
+back too, which is what the savepoint nesting had been silently swallowing.
+
+`deleteReminder` has the same nesting and was left alone — it has no caller that opens
+a transaction today, so the change would have been unverifiable.
+
+Commit: "Run updateReminder in the caller's transaction" (`a3f19c2`).
+====
+------
+
+Note what the `.Fix` block does beyond listing the change: it names what the fix
+deliberately left out (`deleteReminder`), and it ends with the commit subject and short
+hash — the entry's only link to history, since `ISSUES.adoc` is never committed and the
+commit message deliberately doesn't reference the issue ID.
