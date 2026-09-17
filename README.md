@@ -35,6 +35,7 @@ Useful commands:
 | --- | --- |
 | [`asciidoc`](plugins/asciidoc) | Kodein's house rules for writing and structuring AsciiDoc documentation |
 | [`code-review`](plugins/code-review) | Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fixed one commit at a time |
+| [`gradle`](plugins/gradle) | Kodein's conventions for Kotlin and Kotlin Multiplatform Gradle builds |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) to add another.
 
