@@ -58,6 +58,28 @@ So:
 - That set moves with `compose-multiplatform`, so it follows its classification: in the minor/patch
   batch when the Compose bump is minor, in the major's own commit when it is major.
 
+### Exception: the Android Gradle Plugin
+
+**AGP never moves off its current `{major}.{minor}` line without the user's explicit consent.**
+Unlike every other entry, a *minor* bump needs approval here, not just a major one:
+
+- **Patch — always, unasked.** `9.1.0` → `9.1.1` is routine and joins the minor/patch batch like
+  anything else.
+- **Minor or major — only with consent.** `9.1.x` → `9.2.0` or above is never taken silently, even
+  though the rule for every other library would allow the minor.
+
+The reason is that AGP is not only a build dependency: the IDE has to be able to open the project
+afterwards. The Android plugin inside IntelliJ pins the AGP versions it accepts, so a bump the
+build tolerates can still leave the user unable to load their project — a failure that shows up in
+the IDE, not in `./gradlew build`.
+
+**If the user consents, do not take the newest AGP.** Run the `agp-intellij-compatibility` skill to
+find the latest version their IDE supports, and take that. Its answer is a ceiling: the newest AGP
+on Google's repository is regularly several minor lines above what a current IntelliJ can open.
+
+**If the user declines**, AGP still gets its latest patch on the current line — declining the minor
+is not declining the patch.
+
 ## 3. Classify each candidate
 
 For each entry, work out the latest **minor/patch** and the latest **major** available above the
@@ -71,7 +93,8 @@ current version. They are different questions and both need answering:
 
 ## 4. Ask, before touching anything
 
-**Minor and patch bumps need no approval** — they go in.
+**Minor and patch bumps need no approval** — they go in. The one exception is AGP, whose minor
+bumps are asked about too (below).
 
 **Every major bump needs the user's approval**, because it can require source changes. Present all
 of them together, with the alternative spelled out: approving takes the major, declining falls back
@@ -83,6 +106,21 @@ Use `AskUserQuestion` so each is a real choice, and ask about every major in one
 call if there are many, but all of them before the first edit. The batch commit's contents depend
 on these answers: a declined major contributes its minor fallback to the batch, an approved one
 does not.
+
+### AGP is asked about even when only a minor is available
+
+Put it in the same round of questions, phrased as whether to look beyond patches at all:
+
+> AGP is on `9.1.0`. Patch `9.1.1` goes in either way — should I also check for a newer AGP line?
+> That is bounded by what your IDE can open, not by the newest release.
+
+- **Yes** → run the `agp-intellij-compatibility` skill, and use the version it returns. Announce
+  the ceiling with the result (*"IntelliJ 2026.2.3 supports up to AGP 9.1, latest patch 9.1.1"*),
+  because it is often the reason the answer is lower than the user expected.
+- **No** → take the latest patch of the current line and nothing more.
+
+Ask this whenever the project has an `android-gradlePlugin` entry and a non-patch AGP version
+exists — never skip the question on the grounds that the newer line looks routine.
 
 ## 5. Apply, in this order
 
@@ -99,7 +137,7 @@ git commit -m "Update minor and patch dependency versions"
 If the build breaks, fix or drop the offending entry — do not split the batch into per-dependency
 commits to isolate it. Note in the commit message which entry was held back and why.
 
-### One commit per approved major
+### One commit per approved major, and per AGP line change
 
 Separately, in its own commit, because it is the one that may carry source changes:
 
@@ -110,6 +148,9 @@ git commit -m "Update ktor to 4.0.1"
 ```
 
 The message names the library and the version, and describes any source change the bump forced.
+
+An approved AGP move to a new `{major}.{minor}` line gets its own commit on the same grounds, even
+when the version jump is only a minor. Its patch-level bump, by contrast, belongs in the batch.
 
 ### The Gradle wrapper
 

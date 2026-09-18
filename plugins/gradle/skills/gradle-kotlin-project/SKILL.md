@@ -136,6 +136,10 @@ mavenPublish = "0.37.0"             # https://github.com/vanniktech/gradle-maven
 - **Alias naming**: segments separated by `-`, camelCase *inside* a segment —
   `kotlinx-coroutines-test`, `ktor-client-contentNegotiation`, `ksp-symbolProcessingApi`,
   `kotlinPoet-ksp`. The first segment is the ecosystem, so everything from one library sorts together.
+- **`android-gradlePlugin` is capped by the IDE, not by the newest release.** The Android plugin
+  inside IntelliJ pins which AGP versions can open a project, so this entry never leaves its
+  `{major}.{minor}` line without the user's explicit consent — patches are routine, a new line is
+  not. Use the `agp-intellij-compatibility` skill to find the ceiling before proposing one.
 - **Android SDK levels do not go in the catalog** — they are `gradle.properties` entries (§5).
 
 ## 5. gradle.properties
