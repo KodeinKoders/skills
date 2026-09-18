@@ -20,6 +20,10 @@ of a file, and guessing means rewriting.
 A published project needs its GitHub org and repository too — the POM's `url`, `scm` and
 `issueManagement` all name it. Ask for it with the publishing question rather than after.
 
+**Do not ask about the license.** It is MIT (§7 of the skill): write the `LICENSE` file and the
+POM's `licenses` block as MIT and carry on. The user changes it afterwards if they need to, and
+that is cheaper than a question every project pays for.
+
 ## Order of operations
 
 ### 1. Write the root build files
@@ -75,8 +79,11 @@ module — a mistake found here is one file to fix, not ten.
 
 ### 4. Write the project files
 
-Now that the build works, add the files around it — `README.adoc`, `.gitignore`, and the GitHub
-Actions workflows. Templates for all three are below.
+Now that the build works, add the files around it — `LICENSE`, `README.adoc`, `.gitignore`, and the
+GitHub Actions workflows. Templates are below.
+
+`LICENSE` is the MIT text, with the current year and the copyright holder — the author, or
+`Kodein Koders` for a Kodein project. No question asked (§7 of the skill).
 
 Keep them basic: a `README.adoc` with the standard header, the project name and a one-line
 description is enough at this point, and it is the right time to create it — not because there is

@@ -41,7 +41,7 @@ These hold in every project, and a build script that breaks one is wrong even if
   matching root declaration is an error — adding one to the catalog means adding both lines. The
   root declaration resolves the plugin once into a single classloader; without it each subproject
   applying that alias re-resolves it into its own.
-- **A non-obvious line gets a comment saying why.** See §8.
+- **A non-obvious line gets a comment saying why.** See §9.
 
 ## 2. Project layout
 
@@ -223,7 +223,17 @@ Full templates for each are in `references/module-templates.md`. The rules they 
 the `kspCommonMainMetadata` configuration, the generated-source directory, and a task-dependency
 workaround. They are copied verbatim, comment included, from `references/module-templates.md`.
 
-## 7. Publishing
+## 7. License
+
+**MIT, unless the project explicitly says otherwise.** It is the default, not a decision to
+surface: a new project gets a `LICENSE` file with the MIT text, and the POM's `licenses` block
+names MIT. Never ask which license to use when creating a project — write MIT and move on; the user
+changes it if they need to.
+
+Changing it later means changing both places, plus the `license` field of any plugin manifest the
+repository carries.
+
+## 8. Publishing
 
 Vanniktech's `mavenPublish` plugin, with **the shared POM configured once in the root**, applied
 to whichever subprojects carry the plugin:
@@ -253,7 +263,7 @@ mavenPublishing {
 
 The full root block is in `references/new-project.md`.
 
-## 8. Comments
+## 9. Comments
 
 Build scripts explain *why*. A line whose reason isn't obvious from reading it carries a comment,
 and **the same explanation is repeated verbatim wherever the line is copied** — the reader of
@@ -263,7 +273,7 @@ copy the surrounding code.
 
 Write them for someone hitting the failure the line prevents: what breaks without it.
 
-## 9. Git hygiene
+## 10. Git hygiene
 
 `.gitignore` covers `.gradle`, `build/`, `.kotlin`, IDE noise and `.DS_Store`, and explicitly
 un-ignores the wrapper jar (`!gradle/wrapper/gradle-wrapper.jar`). It also ignores **`ISSUES.adoc`**,
@@ -273,7 +283,7 @@ the local review scratch file — see the `issues-adoc` skill. The baseline file
 Committed: the Gradle wrapper (jar included), `kotlin-js-store/`, `README.adoc`, and the agent
 instructions (`.claude/`, `CLAUDE.md`).
 
-## 10. CI
+## 11. CI
 
 Two GitHub Actions workflows, both in `references/new-project.md`:
 
@@ -284,7 +294,7 @@ Two GitHub Actions workflows, both in `references/new-project.md`:
 Both run on `macOS-latest` (the only runner that can build the Apple targets), set up Temurin JDK
 17, use `gradle/actions/setup-gradle@v6`, and invoke `./gradlew --stacktrace --scan build`.
 
-## 11. Verifying a change
+## 12. Verifying a change
 
 After editing any build script:
 
