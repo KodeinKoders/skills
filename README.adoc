@@ -61,7 +61,7 @@ Useful commands:
 | Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fixed one commit at a time
 
 | link:plugins/gradle[`gradle`]
-| `0.2.0`
+| `0.2.1`
 | Kodein's conventions for Kotlin and Kotlin Multiplatform Gradle builds
 |===
 

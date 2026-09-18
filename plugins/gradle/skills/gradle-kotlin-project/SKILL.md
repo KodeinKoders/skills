@@ -122,6 +122,8 @@ mavenPublish = "0.37.0"             # https://github.com/vanniktech/gradle-maven
 
 - **One `kotlin` version drives every Kotlin plugin** — `kotlin-jvm`, `kotlin-multiplatform`,
   `kotlin-plugin-serialization`, `kotlin-plugin-compose` all `version.ref = "kotlin"`.
+- **Kotlin's version is not semver**: `2.X.YZ` is major `2.X`, minor `Y`, patch `Z`, so `2.4.10`
+  and `2.4.20` are consecutive *minors* of Kotlin 2.4, and `2.4.21` → `2.5.0` is a *major* bump.
 - **KSP has its own version line**, independent of Kotlin's — the old
   `<kotlin version>-<ksp version>` pairing is gone, so `ksp = "2.3.11"` alongside
   `kotlin = "2.4.10"` is not a mismatch. Upgrade it from its own release page.

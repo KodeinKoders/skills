@@ -91,6 +91,37 @@ current version. They are different questions and both need answering:
 | `2.3.1` | `2.5.0`, `3.0.1` | `2.5.0` | `3.0.1` |
 | `2.3.1` | `3.0.1` | — | `3.0.1` |
 
+### Exception: Kotlin does not follow semver
+
+**Kotlin versions are `2.X.YZ`**, where the *third* component packs two levels:
+
+| Component | Meaning | In `2.4.21` |
+| --- | --- | --- |
+| `2.X` | the **major** version | Kotlin `2.4` |
+| `Y` | the **minor**, the third component's tens digit | minor `2` |
+| `Z` | the **patch**, its units digit | patch `1` |
+
+So `2.4.10` is Kotlin 2.4, minor 1, patch 0 — and `2.4.20` is the *next minor* of the same major,
+not a patch. Read the third component as a number: minor is it divided by ten, patch the remainder.
+The published stable versions make the pattern plain — `2.4.0`, `2.4.10`, `2.4.20` are three
+minors, while `2.3.20` → `2.3.21` is a patch.
+
+Classifying under this scheme rather than semver:
+
+| Change | Kotlin reading | Classification |
+| --- | --- | --- |
+| `2.4.20` → `2.4.21` | patch 0 → 1 | patch — batch it |
+| `2.4.10` → `2.4.20` | minor 1 → 2 | minor — batch it |
+| `2.4.21` → `2.5.0` | major 2.4 → 2.5 | **major — needs approval, own commit** |
+
+**The trap is the last row.** Semver reads `2.4.21` → `2.5.0` as a minor and would take it silently,
+but it is a Kotlin major: the language, the compiler and every plugin pinned to `version.ref =
+"kotlin"` move together, and the Compose compiler, KSP and AGP each have their own opinion about
+which Kotlin they support. Treat it exactly like any other major — ask, and give it its own commit.
+
+The reverse mistake is as costly: refusing `2.4.10` → `2.4.20` as if it were a major means sitting
+on a stale compiler for no reason.
+
 ## 4. Ask, before touching anything
 
 **Minor and patch bumps need no approval** — they go in. The one exception is AGP, whose minor
