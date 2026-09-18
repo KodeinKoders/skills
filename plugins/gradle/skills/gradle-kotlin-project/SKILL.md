@@ -290,6 +290,11 @@ un-ignores the wrapper jar (`!gradle/wrapper/gradle-wrapper.jar`). It also ignor
 the local review scratch file — see the `issues-adoc` skill. The baseline file is in
 `references/new-project.md`.
 
+**The whole `.idea/` directory is ignored**, not a list of files inside it. IDEA writes new files
+there on its own schedule, so an allow-list of specific entries (`.idea/modules.xml`,
+`.idea/compiler.xml`, …) goes stale and lets machine-specific state into the repository. Nothing
+under `.idea/` is shared — run configurations included; those belong in the README or a script.
+
 Committed: the Gradle wrapper (jar included), `kotlin-js-store/`, `README.adoc`, and the agent
 instructions (`.claude/`, `CLAUDE.md`).
 
