@@ -1,0 +1,91 @@
+= Kodein Claude Skills
+:toc: left
+:toclevels: 3
+:source-highlighter: rouge
+
+[.lead]
+The official https://claude.com/claude-code[Claude Code] plugin marketplace of https://kodein.net[Kodein Koders].
+
+Kotlin, Kotlin Multiplatform and Kodein ecosystem expertise, packaged as skills Claude can load on demand.
+
+
+== Using the marketplace
+
+Add the marketplace once:
+
+[source,sh]
+----
+claude plugin marketplace add KodeinKoders/kodein-claude-skills
+----
+
+Then install the plugins you need:
+
+[source,sh]
+----
+claude plugin install <plugin>@kodein
+----
+
+Useful commands:
+
+[cols="2,3"]
+|===
+| Command | What it does
+
+| `claude plugin marketplace update kodein`
+| Pull the latest plugin list
+
+| `claude plugin list`
+| Show installed plugins
+
+| `claude plugin details <plugin>@kodein`
+| Inspect a plugin's skills and token cost
+
+| `claude plugin uninstall <plugin>@kodein`
+| Remove a plugin
+|===
+
+
+== Available plugins
+
+// Keep this table in sync with .claude-plugin/marketplace.json
+[cols="2,1,6"]
+|===
+| Plugin | Version | Description
+
+| link:plugins/asciidoc[`asciidoc`]
+| `0.1.0`
+| Kodein's house rules for writing and structuring AsciiDoc documentation
+
+| link:plugins/code-review[`code-review`]
+| `0.1.0`
+| Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fixed one commit at a time
+
+| link:plugins/gradle[`gradle`]
+| `0.1.0`
+| Kodein's conventions for Kotlin and Kotlin Multiplatform Gradle builds
+|===
+
+See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc] to add another.
+
+
+== Repository layout
+
+----
+.claude-plugin/
+  marketplace.json      # the marketplace manifest — lists every published plugin
+plugins/
+  <topic>/              # one plugin per topic
+    .claude-plugin/
+      plugin.json       # the plugin manifest
+    skills/
+      <skill-name>/
+        SKILL.md        # the skill itself
+----
+
+One plugin per *topic*, so users install only the expertise they need.
+A topic plugin may hold several related skills.
+
+
+== License
+
+link:LICENSE[MIT] © Kodein Koders

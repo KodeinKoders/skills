@@ -1,0 +1,36 @@
+= asciidoc plugin
+:toc: left
+:toclevels: 2
+:source-highlighter: rouge
+
+[.lead]
+Kodein's house rules for writing and structuring AsciiDoc documentation.
+
+
+== What
+
+One skill, `asciidoc-writing`.
+It covers the document header and attributes, one-sentence-per-line prose, heading levels and anchors, source blocks with callouts, admonitions, lists, tables and cross-references.
+
+A companion `references/snippets.adoc` holds copy-paste templates for each construct, so it is read only when one is needed.
+
+
+== Why
+
+AsciiDoc is the documentation format across Kodein projects — every `README.adoc`, every Antora page, every spec.
+Without a written rule set, each document drifts towards whatever its author remembered, and the diffs stop being reviewable.
+
+More to the point, AsciiDoc has traps that fail silently.
+A single backtick before an apostrophe (`+`Header`'s+`) renders with no code formatting at all and no error, and a line that starts with a space becomes a preformatted block.
+The skill encodes the ones that actually bite, so they are avoided rather than discovered in the rendered output.
+
+
+== How
+
+[source,sh]
+----
+claude plugin install asciidoc@kodein
+----
+
+Claude loads it on its own whenever you create or modify a `.adoc` file, convert Markdown to AsciiDoc, or ask about Asciidoctor formatting and conventions.
+There is nothing to invoke by hand.

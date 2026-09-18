@@ -1,0 +1,37 @@
+= code-review plugin
+:toc: left
+:toclevels: 2
+:source-highlighter: rouge
+
+[.lead]
+Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fixed one commit at a time.
+
+
+== What
+
+One skill, `issues-adoc`.
+It defines `ISSUES.adoc`, a local review file at the repository root, and the workflow around it.
+
+The file structure: lettered sections ordered by descending severity, numbered issues as anchored subsections, each one a heading that is a summary plus a description of what is wrong and why it matters.
+Any finding is then addressable as `B4`, in conversation or from another issue.
+
+The workflow: one issue per commit, commit messages that never reference the file, and a resolved entry that keeps its anchor, strikes its heading through, and gains a collapsible record of both the issue and the fix that was actually implemented.
+
+
+== Why
+
+A review produces more findings than anyone acts on in one sitting.
+Left in a conversation they are unaddressable — you cannot say "fix B4" to something that only exists as scrollback, and you cannot tell later which of them were handled.
+
+`ISSUES.adoc` is never committed, which is what makes it usable as scratch and also what makes the rest of the rules necessary.
+A commit message cannot lean on a file the reader does not have, so it has to stand alone; and since the file is the only surviving record of what was wrong, a resolved entry keeps its description instead of deleting it.
+
+
+== How
+
+[source,sh]
+----
+claude plugin install code-review@kodein
+----
+
+Claude loads it when you ask for a review that should produce a written findings file, when you ask to create or update `ISSUES.adoc`, or the moment you reference a finding by its ID.

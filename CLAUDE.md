@@ -14,9 +14,10 @@ One plugin per topic; a topic may hold several related skills.
 
 ## Rules
 
-- A plugin's `version` must be identical in `plugin.json` and in its marketplace entry.
+- A plugin's `version` must be identical in `plugin.json`, in its marketplace entry, and in
+  the `README.adoc` plugin table.
 - Plugin and skill names are kebab-case and unique across the marketplace.
-- The plugin table in `README.md` mirrors `marketplace.json` — update both together.
+- The plugin table in `README.adoc` mirrors `marketplace.json` — update both together.
 - A skill's `description` frontmatter is what Claude matches a user request against.
   Write it as a trigger ("use when the user asks to…", with the phrases they'd type),
   never as a summary of the content.
@@ -33,4 +34,4 @@ claude plugin validate plugins/<topic>   # a plugin and its skills
 Run both after any manifest or skill change. CI runs them on every push and PR,
 with `--strict` on each plugin.
 
-See `CONTRIBUTING.md` for the full procedure to add a plugin or skill.
+See `CONTRIBUTING.adoc` for the full procedure to add a plugin or skill.

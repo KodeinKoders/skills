@@ -1,0 +1,55 @@
+= gradle plugin
+:toc: left
+:toclevels: 2
+:source-highlighter: rouge
+
+[.lead]
+Kodein's conventions for Kotlin and Kotlin Multiplatform Gradle builds.
+
+
+== What
+
+Two skills.
+
+`gradle-kotlin-project` covers any Kotlin Gradle project — multiplatform, JVM-only, or both in one build.
+
+`SKILL.md` holds the conventions: the version catalog as the single source of coordinates, lexicographic ordering across the catalog, dependency blocks and settings includes, the project-name prefix as the marker of a published module, the toolchain and Android SDK levels centralised in `gradle.properties`, and the root script as the only place a plugin is declared.
+
+Three reference files hold the procedures and the copy-paste material, so they load only when the task needs them:
+
+[cols="2,3"]
+|===
+| File | Covers
+
+| `references/new-project.md`
+| Creating a project: the questions to ask, every root-level file, bootstrapping the wrapper, the first validation run
+
+| `references/module-templates.md`
+| Adding a module: the questions to ask, catalog-first ordering, one build script shape per kind of module
+
+| `references/updating-dependencies.md`
+| Upgrading every version in the build: what to batch, what needs approval, what moves only with Compose Multiplatform
+|===
+
+`agp-intellij-compatibility` answers a narrower question: the highest Android Gradle Plugin version a given IntelliJ IDEA release can open a project with.
+It is what bounds the `android-gradlePlugin` entry when the other skill proposes an upgrade.
+
+
+== Why
+
+A Gradle build accumulates decisions that are invisible once made and expensive to reverse — which module publishes, where the toolchain version lives, whether a catalog entry can be bumped on its own.
+Four Kodein builds converged on the same answers; this skill writes them down so a new project does not re-derive them and an existing one does not drift.
+
+It also preserves the reasons.
+A build script is full of lines whose purpose is not readable from the line itself: why `macosX64` is absent from the target set, why a KSP task needs an explicit dependency, why a Compose component is pinned to an alpha next to a stable plugin.
+Each of those carries the explanation that makes it maintainable, and the skill requires that the explanation travels with the line whenever it is copied.
+
+
+== How
+
+[source,sh]
+----
+claude plugin install gradle@kodein
+----
+
+Claude loads it when you create a Kotlin or KMP project, add a module, add or upgrade a dependency, wire a KSP processor, set up publishing, or ask whether an existing build matches these conventions.
