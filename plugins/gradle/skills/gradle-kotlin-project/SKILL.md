@@ -192,6 +192,16 @@ Full templates for each are in `references/module-templates.md`. The rules they 
 - **`explicitApi()` on every library module**; omit it on demos, samples and applications.
 - **`api` only for a dependency that appears in the module's public signatures**, `implementation`
   for everything else — and record why when it isn't obvious.
+- **`Experimental…` opt-ins are module-wide; `Delicate…` opt-ins never are.** The prefix says which:
+  - An **`Experimental…`** marker (`ExperimentalAtomicApi`, `ExperimentalContracts`,
+    `ExperimentalCoroutinesApi`, `ExperimentalUuidApi`, …) means *this API may still change*. The
+    module has already accepted that by using it, so it goes in `compilerOptions { optIn.add(…) }`
+    once, not on every file and declaration that touches it.
+  - A **`Delicate…`** marker (`DelicateCoroutinesApi`, …) means *this API is stable but easy to
+    misuse*. **A module-wide `Delicate…` opt-in is an error**: it silences the warning at every
+    future call site, including the ones nobody has thought about yet. Opt in at the usage instead,
+    with `@OptIn(DelicateCoroutinesApi::class)` on the smallest scope that covers it — the
+    annotation is the record that this particular call was deliberate.
 
 **Multiplatform modules**
 

@@ -477,8 +477,8 @@ module's API too.
 
 ## Compiler options
 
-Opt-ins and flags go in a `compilerOptions { }` block at the end of `kotlin { }`, never as a
-source-file annotation repeated across the module:
+`Experimental…` opt-ins and compiler flags go in a `compilerOptions { }` block at the end of
+`kotlin { }`, never as a source-file annotation repeated across the module:
 
 ```kotlin
     compilerOptions {
@@ -487,6 +487,22 @@ source-file annotation repeated across the module:
         progressiveMode = true
     }
 ```
+
+**`Delicate…` opt-ins do not belong here.** `optIn.add("kotlinx.coroutines.DelicateCoroutinesApi")`
+is an error: the marker exists to flag a specific hazardous call, and hoisting it to the module
+disarms it for every call site the module ever gains. It belongs at the usage, on the smallest
+scope that covers it:
+
+```kotlin
+@OptIn(DelicateCoroutinesApi::class)
+private fun startBackgroundWorker() {
+    GlobalScope.launch { … }
+}
+```
+
+The two prefixes read as instructions: `Experimental…` is "this may change under you" — a property
+of the dependency, settled once per module. `Delicate…` is "you can hold this wrong" — a property
+of each call, settled at each call.
 
 A flag that works around a specific problem carries the reason:
 
