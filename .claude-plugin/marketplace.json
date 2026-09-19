@@ -11,7 +11,7 @@
       "name": "asciidoc",
       "description": "Kodein's house rules for writing and structuring AsciiDoc documentation",
       "source": "./plugins/asciidoc",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "category": "documentation",
       "license": "MIT",
       "tags": [
@@ -26,7 +26,7 @@
       "name": "code-review",
       "description": "Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fixed one commit at a time",
       "source": "./plugins/code-review",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "category": "development",
       "license": "MIT",
       "tags": [
@@ -41,7 +41,7 @@
       "name": "gradle",
       "description": "Kodein's conventions for Kotlin and Kotlin Multiplatform Gradle builds",
       "source": "./plugins/gradle",
-      "version": "0.2.1",
+      "version": "0.3.0",
       "category": "development",
       "license": "MIT",
       "tags": [

@@ -1,5 +1,5 @@
 ---
-name: asciidoc-writing
+name: kodein-asciidoc-writing
 description: Kodein's house rules for writing and editing AsciiDoc — document header and attributes, one-sentence-per-line prose, heading levels and anchors, source blocks with callouts, admonitions, lists, tables and cross-references. Use whenever creating or modifying a .adoc file (README.adoc, Antora page, spec document), converting Markdown to AsciiDoc, or when asked about AsciiDoc/Asciidoctor formatting, style or conventions.
 ---
 

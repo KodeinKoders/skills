@@ -35,12 +35,12 @@ mkdir -p plugins/<topic>/.claude-plugin plugins/<topic>/skills
 
 == 2. Add a skill
 
-`plugins/<topic>/skills/<skill-name>/SKILL.md`:
+`plugins/<topic>/skills/kodein-<skill-name>/SKILL.md`:
 
 [source,markdown]
 ----
 ---
-name: <skill-name>
+name: kodein-<skill-name>
 description: Describe WHEN Claude should load this, with the trigger phrases a user would actually type. This string is what Claude matches the request against — be specific.
 ---
 
@@ -51,6 +51,9 @@ What the skill does, and the steps Claude should take.
 
 Guidelines:
 
+* Skill directory and `name:` both carry the `kodein-` prefix — it is what makes the
+  skill recognisable once installed flat, outside the marketplace's own namespacing (see
+  CLAUDE.md).
 * The `description` is a router, not a summary.
 Name the technologies, tasks and phrases that should trigger it, and say when _not_ to use it if that is ambiguous.
 * Keep `SKILL.md` focused.
@@ -93,10 +96,22 @@ CI runs the same checks, with `--strict` on each plugin.
 
 == 5. Try it locally
 
+Via the marketplace, in Claude Code:
+
 [source,sh]
 ----
 claude plugin marketplace add ./
 claude plugin install <topic>@kodein
+----
+
+Or via `npx skills`, which reaches Claude Code and every other supported agent, and
+accepts a local path — `add`d this way, it symlinks by default, so edits in the working
+tree are live immediately, with no commit/push/re-sync step:
+
+[source,sh]
+----
+npx skills add ./ -g -a claude-code opencode -l   # preview the skill names it finds
+npx skills add ./ -g -a claude-code opencode      # install from the working tree
 ----
 
 

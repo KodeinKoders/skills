@@ -88,7 +88,7 @@ GitHub Actions workflows. Templates are below.
 Keep them basic: a `README.adoc` with the standard header, the project name and a one-line
 description is enough at this point, and it is the right time to create it — not because there is
 much to say yet, but because the file exists to be filled in as the project grows. The
-`asciidoc-writing` skill has the house rules for the prose.
+`kodein-asciidoc-writing` skill has the house rules for the prose.
 
 Write `.github/workflows/release.yml` only if the project publishes.
 
@@ -317,7 +317,7 @@ is, for whom, in the user's terms — not a feature list. Then a short paragraph
 does.
 
 Everything else (usage, a `[source,kotlin]` sample, installation) arrives as the project grows. Add
-`:icons: font` when the document gains its first admonition, not before. See the `asciidoc-writing`
+`:icons: font` when the document gains its first admonition, not before. See the `kodein-asciidoc-writing`
 skill for the rest.
 
 ## `.gitignore`

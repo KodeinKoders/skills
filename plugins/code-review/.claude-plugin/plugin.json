@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "code-review",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fixed one commit at a time",
   "author": {
     "name": "Kodein Koders",

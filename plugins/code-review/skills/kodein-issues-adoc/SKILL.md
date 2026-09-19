@@ -1,5 +1,5 @@
 ---
-name: issues-adoc
+name: kodein-issues-adoc
 description: "Create or maintain a project's ISSUES.adoc review file, and resolve the issues tracked in it. Use when the user asks for a code review that should produce a written findings file, asks to create or update ISSUES.adoc, references a finding by an ID like B4, or asks to fix, close or cross-check issues tracked in ISSUES.adoc. Covers the file structure (lettered sections ordered by severity, numbered issues as anchored subsections), git hygiene (never committed), and the fix-and-commit workflow (one issue per commit, strikethrough plus Issue/Fix blocks once a fix is committed)."
 ---
 
@@ -34,7 +34,7 @@ Never `git add` or commit `ISSUES.adoc` itself, at any point in the workflow bel
 <One or two sentences on what this review covers.>
 
 IMPORTANT: When one or more issues from this file are referenced — to fix, close, cross-check, or
-discuss by ID — load the `issues-adoc` skill first. It defines how an issue here is researched,
+discuss by ID — load the `kodein-issues-adoc` skill first. It defines how an issue here is researched,
 fixed (one commit per issue), and struck through once the fix is committed. This file is local
 scratch and is never committed.
 
@@ -101,7 +101,7 @@ Rules:
 
 ### AsciiDoc pitfalls to avoid
 
-The `asciidoc-writing` skill has Kodein's full AsciiDoc rules; load it when in doubt.
+The `kodein-asciidoc-writing` skill has Kodein's full AsciiDoc rules; load it when in doubt.
 These are the Markdown habits that silently produce wrong output *in this file*:
 
 - **Never indent a description.** In AsciiDoc a line starting with whitespace is a

@@ -11,7 +11,7 @@ Kodein's conventions for Kotlin and Kotlin Multiplatform Gradle builds.
 
 Two skills.
 
-`gradle-kotlin-project` covers any Kotlin Gradle project — multiplatform, JVM-only, or both in one build.
+`kodein-gradle-kotlin-project` covers any Kotlin Gradle project — multiplatform, JVM-only, or both in one build.
 
 `SKILL.md` holds the conventions: the version catalog as the single source of coordinates, lexicographic ordering across the catalog, dependency blocks and settings includes, the project-name prefix as the marker of a published module, the toolchain and Android SDK levels centralised in `gradle.properties`, and the root script as the only place a plugin is declared.
 
@@ -31,7 +31,7 @@ Three reference files hold the procedures and the copy-paste material, so they l
 | Upgrading every version in the build: what to batch, what needs approval, what moves only with Compose Multiplatform
 |===
 
-`agp-intellij-compatibility` answers a narrower question: the highest Android Gradle Plugin version a given IntelliJ IDEA release can open a project with.
+`kodein-agp-intellij-compatibility` answers a narrower question: the highest Android Gradle Plugin version a given IntelliJ IDEA release can open a project with.
 It is what bounds the `android-gradlePlugin` entry when the other skill proposes an upgrade.
 
 

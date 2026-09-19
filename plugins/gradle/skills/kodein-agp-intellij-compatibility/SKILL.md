@@ -1,5 +1,5 @@
 ---
-name: agp-intellij-compatibility
+name: kodein-agp-intellij-compatibility
 description: "Find the latest Android Gradle Plugin version a given IntelliJ IDEA or Android Studio version supports. Use when the user asks which AGP version their IDE supports, which IntelliJ version is needed for an AGP version, why the IDE reports an unsupported or too-new Android Gradle Plugin, or before bumping the android-gradlePlugin entry of a version catalog."
 ---
 
@@ -256,6 +256,6 @@ Report the whole chain, because the intermediate hops are what make the answer c
 > **9.1**. The latest patch of that line is **9.1.1**.
 
 That is the value for the `android-gradlePlugin` entry of the version catalog. It matters to the
-`gradle-kotlin-project` skill, whose dependency-update procedure otherwise takes the newest AGP
+`kodein-gradle-kotlin-project` skill, whose dependency-update procedure otherwise takes the newest AGP
 from its own release page — which for this IDE would be `9.4.0`, three minor lines above what it
 can open.
