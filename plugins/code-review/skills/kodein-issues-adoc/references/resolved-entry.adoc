@@ -1,8 +1,7 @@
 = Resolving an ISSUES.adoc entry: before and after
 :icons: font
 
-A worked example of §3 of `SKILL.md`: what one entry looks like while it is pending, and
-what the same entry looks like once its fix has been committed.
+A worked example of §3 of `SKILL.md`: what one entry looks like while it is pending, and what the same entry looks like once its fix has been committed.
 
 
 == Pending
@@ -23,9 +22,7 @@ silently committing the outer transaction's other writes. Drop the inner
 
 == Fixed and committed
 
-The anchor and the heading text are unchanged; the heading is wrapped in the
-`line-through` role, the original description moves verbatim into `.Issue`, and `.Fix`
-records what was actually implemented.
+The anchor and the heading text are unchanged; the heading is wrapped in the `line-through` role, the original description moves verbatim into `.Issue`, and `.Fix` records what was actually implemented.
 
 [source,adoc]
 ------
@@ -58,7 +55,4 @@ Commit: "Run updateReminder in the caller's transaction" (`a3f19c2`).
 ====
 ------
 
-Note what the `.Fix` block does beyond listing the change: it names what the fix
-deliberately left out (`deleteReminder`), and it ends with the commit subject and short
-hash — the entry's only link to history, since `ISSUES.adoc` is never committed and the
-commit message deliberately doesn't reference the issue ID.
+Note what the `.Fix` block does beyond listing the change: it names what the fix deliberately left out (`deleteReminder`), and it ends with the commit subject and short hash — the entry's only link to history, since `ISSUES.adoc` is never committed and the commit message deliberately doesn't reference the issue ID.

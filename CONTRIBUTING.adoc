@@ -51,9 +51,8 @@ What the skill does, and the steps Claude should take.
 
 Guidelines:
 
-* Skill directory and `name:` both carry the `kodein-` prefix — it is what makes the
-  skill recognisable once installed flat, outside the marketplace's own namespacing (see
-  CLAUDE.md).
+* Skill directory and `name:` both carry the `kodein-` prefix.
+It is what makes the skill recognisable once installed flat, outside the marketplace's own namespacing (see CLAUDE.md).
 * The `description` is a router, not a summary.
 Name the technologies, tasks and phrases that should trigger it, and say when _not_ to use it if that is ambiguous.
 * Keep `SKILL.md` focused.
@@ -104,9 +103,8 @@ claude plugin marketplace add ./
 claude plugin install <topic>@kodein
 ----
 
-Or via `npx skills`, which reaches Claude Code and every other supported agent, and
-accepts a local path — `add`d this way, it symlinks by default, so edits in the working
-tree are live immediately, with no commit/push/re-sync step:
+Or via `npx skills`, which reaches Claude Code and every other supported agent, and accepts a local path.
+A local path added this way symlinks by default, so edits in the working tree are live immediately, with no commit/push/re-sync step:
 
 [source,sh]
 ----

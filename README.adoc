@@ -25,9 +25,8 @@ Then install the plugins you need:
 claude plugin install <plugin>@kodein
 ----
 
-Skill names inside a plugin are namespaced by the plugin, e.g.
-`/gradle:kodein-gradle-kotlin-project`. Every skill is also prefixed `kodein-` in its own
-right (see below), so the prefix survives outside this namespacing too.
+Skill names inside a plugin are namespaced by the plugin, e.g. `/gradle:kodein-gradle-kotlin-project`.
+Every skill is also prefixed `kodein-` in its own right (see below), so the prefix survives outside this namespacing too.
 
 Useful commands:
 
@@ -74,9 +73,7 @@ See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc] to add another.
 
 == Using it outside Claude Code
 
-These skills are plain `SKILL.md` files and also install through
-https://skills.sh/[`npx skills`], which reaches OpenCode, Codex, Zed, Warp, Junie and
-every other agent that tool supports — no marketplace needed:
+These skills are plain `SKILL.md` files and also install through https://skills.sh/[`npx skills`], which reaches OpenCode, Codex, Zed, Warp, Junie and every other agent that tool supports — no marketplace needed:
 
 [source,sh]
 ----
@@ -87,8 +84,7 @@ npx skills add KodeinKoders/skills -g -a claude-code opencode
 npx skills add KodeinKoders/skills -g --all
 ----
 
-That channel does not namespace by plugin, which is why every skill name is prefixed
-`kodein-` at the source: it stays recognisable and collision-free as a flat name too.
+That channel does not namespace by plugin, which is why every skill name is prefixed `kodein-` at the source: it stays recognisable and collision-free as a flat name too.
 
 
 == Repository layout
