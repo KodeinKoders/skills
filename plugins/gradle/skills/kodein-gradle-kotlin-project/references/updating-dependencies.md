@@ -73,7 +73,7 @@ afterwards. The Android plugin inside IntelliJ pins the AGP versions it accepts,
 build tolerates can still leave the user unable to load their project — a failure that shows up in
 the IDE, not in `./gradlew build`.
 
-**If the user consents, do not take the newest AGP.** Run the `agp-intellij-compatibility` skill to
+**If the user consents, do not take the newest AGP.** Run the `kodein-agp-intellij-compatibility` skill to
 find the latest version their IDE supports, and take that. Its answer is a ceiling: the newest AGP
 on Google's repository is regularly several minor lines above what a current IntelliJ can open.
 
@@ -145,7 +145,7 @@ Put it in the same round of questions, phrased as whether to look beyond patches
 > AGP is on `9.1.0`. Patch `9.1.1` goes in either way — should I also check for a newer AGP line?
 > That is bounded by what your IDE can open, not by the newest release.
 
-- **Yes** → run the `agp-intellij-compatibility` skill, and use the version it returns. Announce
+- **Yes** → run the `kodein-agp-intellij-compatibility` skill, and use the version it returns. Announce
   the ceiling with the result (*"IntelliJ 2026.2.3 supports up to AGP 9.1, latest patch 9.1.1"*),
   because it is often the reason the answer is lower than the user expected.
 - **No** → take the latest patch of the current line and nothing more.

@@ -9,7 +9,7 @@ Kodein's house rules for writing and structuring AsciiDoc documentation.
 
 == What
 
-One skill, `asciidoc-writing`.
+One skill, `kodein-asciidoc-writing`.
 It covers the document header and attributes, one-sentence-per-line prose, heading levels and anchors, source blocks with callouts, admonitions, lists, tables and cross-references.
 
 A companion `references/snippets.adoc` holds copy-paste templates for each construct, so it is read only when one is needed.

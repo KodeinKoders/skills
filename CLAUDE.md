@@ -1,7 +1,9 @@
-# kodein-claude-skills
+# skills
 
-Claude Code plugin marketplace published by Kodein Koders. It contains **no application
-code** — only manifests and skill documents.
+Claude Code plugin marketplace published by Kodein Koders (`KodeinKoders/skills`). It
+contains **no application code** — only manifests and skill documents. The same skills
+also install into other agents (OpenCode, Codex, Zed, …) via `npx skills`; see
+README.adoc.
 
 ## Layout
 
@@ -16,7 +18,10 @@ One plugin per topic; a topic may hold several related skills.
 
 - A plugin's `version` must be identical in `plugin.json`, in its marketplace entry, and in
   the `README.adoc` plugin table.
-- Plugin and skill names are kebab-case and unique across the marketplace.
+- Plugin and skill names are kebab-case and unique across the marketplace. Skill
+  directories and their `name:` frontmatter are prefixed `kodein-`; plugin names are not
+  (a plugin already namespaces its skills in Claude Code, but the `npx skills` channel to
+  other agents does not, so the prefix lives on the skill itself).
 - The plugin table in `README.adoc` mirrors `marketplace.json` — update both together.
 - A skill's `description` frontmatter is what Claude matches a user request against.
   Write it as a trigger ("use when the user asks to…", with the phrases they'd type),

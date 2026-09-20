@@ -9,7 +9,7 @@ Kodein's code review workflow: findings recorded in an ISSUES.adoc file, then fi
 
 == What
 
-One skill, `issues-adoc`.
+One skill, `kodein-issues-adoc`.
 It defines `ISSUES.adoc`, a local review file at the repository root, and the workflow around it.
 
 The file structure: lettered sections ordered by descending severity, numbered issues as anchored subsections, each one a heading that is a summary plus a description of what is wrong and why it matters.

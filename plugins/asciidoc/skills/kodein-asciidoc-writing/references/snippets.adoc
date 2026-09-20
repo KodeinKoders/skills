@@ -120,8 +120,7 @@ NOTE: The helper dependency must be active.
 
 == Doubled (unconstrained) inline markers
 
-Needed when the formatted span touches a word character, or — for backticks only — a
-quote character.
+Needed when the formatted span touches a word character, or — for backticks only — a quote character.
 
 [source,adoc]
 ----

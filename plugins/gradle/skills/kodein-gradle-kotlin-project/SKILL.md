@@ -1,5 +1,5 @@
 ---
-name: gradle-kotlin-project
+name: kodein-gradle-kotlin-project
 description: "Kodein's conventions for Kotlin/Kotlin Multiplatform Gradle builds — settings.gradle.kts, gradle.properties, the gradle/libs.versions.toml version catalog, root and module build scripts, target sets, KSP wiring, Maven Central publishing, .gitignore and CI. Use when creating a new Kotlin or KMP Gradle project, adding a module or subproject to one, adding or upgrading a dependency or plugin version, wiring a KSP processor, setting up publishing, or reviewing an existing build for consistency with these conventions."
 ---
 
@@ -141,7 +141,7 @@ mavenPublish = "0.37.0"             # https://github.com/vanniktech/gradle-maven
 - **`android-gradlePlugin` is capped by the IDE, not by the newest release.** The Android plugin
   inside IntelliJ pins which AGP versions can open a project, so this entry never leaves its
   `{major}.{minor}` line without the user's explicit consent — patches are routine, a new line is
-  not. Use the `agp-intellij-compatibility` skill to find the ceiling before proposing one.
+  not. Use the `kodein-agp-intellij-compatibility` skill to find the ceiling before proposing one.
 - **Android SDK levels do not go in the catalog** — they are `gradle.properties` entries (§5).
 
 ## 5. gradle.properties
@@ -293,7 +293,7 @@ Write them for someone hitting the failure the line prevents: what breaks withou
 
 `.gitignore` covers `.gradle`, `build/`, `.kotlin`, IDE noise and `.DS_Store`, and explicitly
 un-ignores the wrapper jar (`!gradle/wrapper/gradle-wrapper.jar`). It also ignores **`ISSUES.adoc`**,
-the local review scratch file — see the `issues-adoc` skill. The baseline file is in
+the local review scratch file — see the `kodein-issues-adoc` skill. The baseline file is in
 `references/new-project.md`.
 
 **The whole `.idea/` directory is ignored**, not a list of files inside it. IDEA writes new files
