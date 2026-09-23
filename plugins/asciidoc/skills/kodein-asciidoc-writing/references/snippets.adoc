@@ -24,7 +24,7 @@ One sentence describing what this document covers.
 
 [source,adoc]
 ----
-[[page-anchor]]
+[#page-anchor]
 = Page Title
 
 Opening sentence.
@@ -164,6 +164,6 @@ The logo image:icon.svg[16,16] can also be inline.
 
 [source,adoc]
 ----
-include::example$build.gradle.kts[tag=plugins]
-include::partial$common-warning.adoc[]
+\include::example$build.gradle.kts[tag=plugins]
+\include::partial$common-warning.adoc[]
 ----

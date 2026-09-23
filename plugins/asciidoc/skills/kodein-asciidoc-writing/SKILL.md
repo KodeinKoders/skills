@@ -116,13 +116,36 @@ text
 `Bar` closes the `Foo` section, so it gets two. `Baz` opens immediately under `Bar` with no content
 between them, so it gets one — a gap there would suggest `Bar` had a body that is missing.
 
-Give a heading an anchor when it is a cross-reference target. The anchor goes on the
-line directly above the heading, in kebab-case, with no blank line between them:
+Give a heading an ID when it is a cross-reference target. **Set it with an attribute list —
+`[#id]`, never `[[id]]`.** The double-bracket form is the legacy block-anchor syntax; it still
+renders, but `[#id]` is one syntax for IDs, roles and options instead of two.
 
 ```adoc
-[[tagged-bindings]]
+[#tagged-bindings]
 == Tagged bindings
 ```
+
+**An attribute list on a heading is part of that heading.** So there is never a blank line between
+the two, and the spacing rule above counts the blank lines *before the attribute list*, not before
+the `==`:
+
+```adoc
+== Foo
+
+text
+
+
+[#tagged-bindings]
+== Tagged bindings
+
+text
+```
+
+The same holds for any attribute list a heading carries — `[#id]`, `[.role]`, `[discrete]` — and
+for a heading directly under another, which still takes one blank line before its attribute list.
+
+IDs are kebab-case, unless the document uses a scheme of its own (`ISSUES.adoc` numbers its issues
+`[#B4]`, for instance).
 
 ## Source blocks
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "asciidoc",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Kodein's house rules for writing and structuring AsciiDoc documentation",
   "author": {
     "name": "Kodein Koders",
