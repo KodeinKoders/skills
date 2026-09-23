@@ -94,8 +94,27 @@ mid-word fragments — that is the whole of it in practice.
 
 - `=` document title, `==` section, `===` subsection, `====` sub-subsection.
 - Never use Markdown `#` headings.
-- Leave **two blank lines** before a section heading, one after it.
 - Sentence case, no trailing punctuation.
+- One blank line **after** a heading, always.
+- **Two blank lines before a heading that follows content, one before a heading that follows
+  another heading.** The two blank lines separate a section from the one that ended; where nothing
+  ended, there is nothing to separate.
+
+```adoc
+== Foo
+
+text
+
+
+== Bar
+
+=== Baz
+
+text
+```
+
+`Bar` closes the `Foo` section, so it gets two. `Baz` opens immediately under `Bar` with no content
+between them, so it gets one — a gap there would suggest `Bar` had a body that is missing.
 
 Give a heading an anchor when it is a cross-reference target. The anchor goes on the
 line directly above the heading, in kebab-case, with no blank line between them:

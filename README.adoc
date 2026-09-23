@@ -56,7 +56,7 @@ Useful commands:
 | Plugin | Version | Description
 
 | link:plugins/asciidoc[`asciidoc`]
-| `0.2.0`
+| `0.2.1`
 | Kodein's house rules for writing and structuring AsciiDoc documentation
 
 | link:plugins/code-review[`code-review`]
