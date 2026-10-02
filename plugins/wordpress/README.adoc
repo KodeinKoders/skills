@@ -10,14 +10,14 @@ Authenticated requests to a WordPress REST API, with credentials read from a per
 == What
 
 One skill, `kodein-wordpress`.
-When asked to work on a WordPress site, it looks for `~/.config/wordpress-agent/<domain>.conf`, reads it as HOCON, and, if `auth.username` and `auth.password` are set, sends every REST API request with them as basic auth.
+When asked to work on a WordPress site, it looks for a `.wordpress-agent.conf` in the current working directory, and failing that for `~/.config/wordpress-agent/<domain>.conf` (`%LOCALAPPDATA%\wordpress-agent\<domain>.conf` on Windows), reads it as HOCON, and, if `auth.username` and `auth.password` are set, sends every REST API request with them as basic auth.
 
 A companion `references/hocon.md` lists the HOCON forms those keys can take, so it is read only when needed.
 
 
 == Credentials file
 
-`~/.config/wordpress-agent/wp-example.com.conf`:
+`~/.config/wordpress-agent/wp-example.com.conf` (on Windows: `%LOCALAPPDATA%\wordpress-agent\wp-example.com.conf`):
 
 [source,hocon]
 ----
@@ -28,7 +28,15 @@ auth {
 ----
 
 The password is typically a WordPress application password (Users > Profile > Application Passwords).
-Keep the file private (`chmod 600`).
+Keep the file private (`chmod 600` on macOS and Linux; on Windows, `%LOCALAPPDATA%` is private to your account by default).
+
+
+== Local credentials file
+
+A `.wordpress-agent.conf` in the directory Claude is working from is used _instead of_ the global file, with the same content and no domain in its name.
+It is handy for a project tied to a single site.
+It is not merged with the global file, and parent directories are not searched.
+Add it to `.gitignore`: it holds a password.
 
 
 == How

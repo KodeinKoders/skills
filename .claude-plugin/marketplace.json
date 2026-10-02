@@ -57,7 +57,7 @@
       "name": "wordpress",
       "description": "Authenticated requests to a WordPress REST API, with credentials read from a per-domain HOCON file",
       "source": "./plugins/wordpress",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "development",
       "license": "MIT",
       "tags": [
