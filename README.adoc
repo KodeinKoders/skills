@@ -66,6 +66,10 @@ Useful commands:
 | link:plugins/gradle[`gradle`]
 | `0.3.0`
 | Kodein's conventions for Kotlin and Kotlin Multiplatform Gradle builds
+
+| link:plugins/wordpress[`wordpress`]
+| `0.1.0`
+| Authenticated requests to a WordPress REST API, with credentials read from a per-domain HOCON file
 |===
 
 See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc] to add another.

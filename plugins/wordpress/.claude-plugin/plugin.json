@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "wordpress",
+  "version": "0.1.0",
+  "description": "Authenticated requests to a WordPress REST API, with credentials read from a per-domain HOCON file",
+  "author": {
+    "name": "Kodein Koders",
+    "url": "https://kodein.net"
+  },
+  "license": "MIT",
+  "skills": [
+    "./skills"
+  ]
+}

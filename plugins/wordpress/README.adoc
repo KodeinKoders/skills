@@ -1,0 +1,42 @@
+= wordpress plugin
+:toc: left
+:toclevels: 2
+:source-highlighter: rouge
+
+[.lead]
+Authenticated requests to a WordPress REST API, with credentials read from a per-domain HOCON file.
+
+
+== What
+
+One skill, `kodein-wordpress`.
+When asked to work on a WordPress site, it looks for `~/.config/wordpress-agent/<domain>.conf`, reads it as HOCON, and, if `auth.username` and `auth.password` are set, sends every REST API request with them as basic auth.
+
+A companion `references/hocon.md` lists the HOCON forms those keys can take, so it is read only when needed.
+
+
+== Credentials file
+
+`~/.config/wordpress-agent/wp-example.com.conf`:
+
+[source,hocon]
+----
+auth {
+    username = editor@wp-example.com
+    password = "xxxx xxxx xxxx xxxx"
+}
+----
+
+The password is typically a WordPress application password (Users > Profile > Application Passwords).
+Keep the file private (`chmod 600`).
+
+
+== How
+
+[source,sh]
+----
+claude plugin install wordpress@kodein
+----
+
+Claude loads it on its own whenever you ask it to read or change content on a WordPress site.
+There is nothing to invoke by hand.
