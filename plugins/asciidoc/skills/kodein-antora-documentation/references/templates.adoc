@@ -1,0 +1,356 @@
+= Antora component templates
+:icons: font
+
+Copy-paste templates for the component described in `SKILL.md`.
+Replace `Lib`, `lib` and the coordinates with the library's own.
+
+
+== Creating a component
+
+1. Write `doc/antora.yml` from the template below, with the release version of the root `build.gradle.kts`.
+2. Create `modules/ROOT` with its nav, `index.adoc` and `getting-started.adoc`.
+3. Create `modules/core`, starting with `setup.adoc`, then one page per concept.
+4. Add a module per family of context pages (`guides`, `framework`...), and `migration` when there is a previous major version.
+5. List every module nav in `antora.yml`.
+
+
+== `antora.yml`
+
+For release `1.3.0`:
+
+[source,yaml]
+----
+name: lib
+title: Lib
+version: '1.3.0' # <1>
+display_version: '1.3' # <2>
+nav:
+  - modules/ROOT/nav.adoc
+  - modules/core/nav.adoc
+  - modules/guides/nav.adoc
+  - modules/migration/nav.adoc
+asciidoc:
+  attributes:
+    version: '1.3.0' # <3>
+    kotlin-version: '2.4.20' # <4>
+    ksp-version: '2.3.12'
+    jdk: '17' # <5>
+----
+<1> The release version, `1.3.0-RC1` for a pre-release.
+<2> The version without patch or tag, quoted so that YAML does not read `1.10` as `1.1`.
+<3> The release version again, which pages write `\{version}`.
+<4> Equal to the `kotlin` version of `gradle/libs.versions.toml`, like every `XXX-version` attribute.
+<5> Not in the version catalog, so its name does not end in `-version`.
+
+
+== Standalone site
+
+A library that publishes its own site keeps its component in `docs/` instead of `doc/`, and adds the files below at the repository root.
+Replace `Lib`, `lib` and the GitHub coordinates with the library's own.
+
+.`antora-playbook.yml`
+[source,yaml]
+----
+site:
+  title: Lib Documentation
+  url: https://KodeinKoders.github.io/Lib # <1>
+  start_page: lib::index.adoc # <2>
+  robots: allow
+content:
+  sources:
+    - url: ./ # <3>
+      start_path: docs
+asciidoc:
+  extensions:
+    - '@asciidoctor/tabs' # <4>
+ui:
+  bundle:
+    url: https://github.com/kosi-libs/documentation-ui/raw/cup/build/ui-bundle-v1.2.2.zip # <5>
+  supplemental_files:
+    - path: ui.yml
+      contents: |
+        static_files: [ .nojekyll ]
+    - path: .nojekyll # <6>
+urls:
+  redirect_facility: 'static'
+output:
+  dir: build/site
+----
+<1> Where GitHub Pages serves the site.
+<2> `name` of the component from `antora.yml`, then `::` and the page.
+<3> The repository itself, so the site is built from the checked-out branch.
+<4> Only if the pages use tabs; the package must then be in `package.json`.
+<5> The UI bundle that the site is themed with.
+<6> Without an empty `.nojekyll`, GitHub Pages ignores the directories whose name starts with an underscore, which Antora's assets do.
+
+.`package.json`
+[source,json]
+----
+{
+  "dependencies": {
+    "antora": "^3.1.7",
+    "@asciidoctor/tabs": "^1.0.0-beta.6"
+  }
+}
+----
+
+Build it with `npm install` then `npx antora antora-playbook.yml`; the site lands in `build/site`.
+Add `node_modules` and `build` to `.gitignore`.
+A GitHub Actions workflow runs the same two commands and publishes `build/site` to GitHub Pages.
+
+
+== Nav files
+
+.`modules/ROOT/nav.adoc`
+[source,adoc]
+----
+* xref:index.adoc[Introduction]
+* xref:getting-started.adoc[Getting started]
+----
+
+.`modules/core/nav.adoc`
+[source,adoc]
+----
+* xref:setup.adoc[]
+* xref:first-concept.adoc[]
+** xref:first-concept.adoc#an-option[An option]
+* xref:second-concept.adoc[]
+----
+
+.`modules/guides/nav.adoc`
+[source,adoc]
+----
+.Guides
+* xref:testing.adoc[]
+* xref:android.adoc[]
+----
+
+.`modules/migration/nav.adoc`
+[source,adoc]
+----
+.Migration
+* xref:1to2.adoc[]
+* xref:2to3.adoc[]
+----
+
+
+== Introduction page
+
+.`modules/ROOT/pages/index.adoc`
+[source,adoc]
+----
+= Lib
+
+[.lead]
+What Lib is, in one sentence.
+
+One or two sentences on what problem it solves, and how.
+
+[source,kotlin]
+------
+// The shortest sample that shows Lib at its best.
+------
+
+
+== Why Lib
+
+First design choice::
+What it means for the user, in two or three sentences.
+
+Second design choice::
+...
+
+
+== How to read this documentation
+
+* xref:getting-started.adoc[] gets a first ... working in a few minutes.
+* The *Core* section explains ... from the ground up.
+* The *Guides* section shows Lib in context: testing, ...
+----
+
+
+== Getting-started page
+
+One platform, numbered steps, a code block per step.
+The `--` open block is required whenever prose follows a callout list inside a step.
+
+.`modules/ROOT/pages/getting-started.adoc`
+[source,adoc]
+----
+= Getting started
+
+This page takes a JVM project from nothing to a working ....
+For Kotlin Multiplatform projects, see xref:core:setup.adoc[].
+
+1. Add the dependency:
++
+[source,kotlin,subs="verbatim,attributes"]
+.build.gradle.kts
+------
+plugins {
+    kotlin("jvm") version "{kotlin-version}"
+}
+
+dependencies {
+    implementation("org.kodein.lib:lib:{version}")
+}
+------
+
+2. Declare a ...:
++
+--
+[source,kotlin]
+------
+// ...
+------
+
+A sentence explaining what the reader just wrote.
+--
+
+3. Use it:
++
+[source,kotlin]
+------
+// ...
+------
+
+That's it!
+From here, xref:core:first-concept.adoc[] explains ....
+----
+
+
+== Setup page
+
+.`modules/core/pages/setup.adoc`
+[source,adoc]
+----
+= Setup
+
+Lib ships N artifacts:
+
+[cols="2,3"]
+|===
+| Artifact | Purpose
+
+| `org.kodein.lib:lib`
+| ...
+|===
+
+
+== Kotlin Multiplatform
+
+[source,kotlin,subs="verbatim,attributes"]
+.build.gradle.kts
+------
+// ...
+------
+
+
+== JVM
+
+[source,kotlin,subs="verbatim,attributes"]
+.build.gradle.kts
+------
+// ...
+------
+----
+
+For a KSP-based library, add right after the artifact table:
+
+[source,adoc]
+----
+IMPORTANT: Lib runs on KSP but does not install it in your project.
+The KSP version to use depends on the Kotlin version you are using, so it is your responsibility to apply it alongside Lib.
+----
+
+And end the page with a `== What gets generated` section listing each generated declaration, its name and where it lands.
+
+
+== Concept page
+
+[source,adoc]
+----
+= Declaring a module
+
+One or two sentences on what this page covers.
+
+
+== The simplest case
+
+The common case, with its call site.
+
+
+[#an-option]
+== An option
+
+Each option or variation in its own section, with an explicit ID when another page links to it.
+
+TIP: xref:guides:testing.adoc[] shows how ... is used in tests.
+----
+
+
+== `README.adoc`
+
+At the repository root; see section 7 of `SKILL.md`.
+The tagline, description, sample and "Why" are copied from `index.adoc`.
+
+[source,adoc]
+----
+= Lib
+:toc: macro
+:toclevels: 2
+:idprefix:
+:idseparator: -
+:icons: font
+:source-highlighter: highlight.js
+:version: 1.3.0
+
+[.lead]
+The tagline: what Lib is for, in one sentence.
+
+One or two sentences on what Lib does, and how the user asks for it.
+
+.Main.kt
+[source,kotlin]
+------
+// The same sample as the introduction.
+------
+
+No ..., no ... — one sentence on what Lib refuses to do.
+
+toc::[]
+
+
+== Why Lib
+
+*First design choice.*
+What it means for the user, in two or three sentences.
+
+*Second design choice.*
+...
+
+
+== Installation
+
+WARNING: Version 2.0 brings ..., but with breaking changes.
+If you are on version 1.17, see the https://kosi-libs.org/lib/2.0/migration/1to2.html[1.x to 2.x migration guide].
+
+The shortest setup that works:
+
+[source,kotlin,subs="verbatim,attributes"]
+.build.gradle.kts
+------
+plugins {
+    kotlin("multiplatform")
+    id("org.kodein.lib") version "{version}" // <1>
+}
+------
+<1> What this line does for the reader.
+
+For the other platforms and setups, see the https://kosi-libs.org/lib/latest/core/setup.html[setup page].
+
+
+== Documentation
+
+The full documentation is on https://kosi-libs.org/lib[kosi-libs.org].
+----

@@ -1,0 +1,80 @@
+= Verifying the documentation
+:icons: font
+
+A page is done when its samples compile, its claims have been run, and the component builds without a warning.
+Run the three checks below in order, then report what each one found.
+
+
+== 1. Compile the samples
+
+Reading the code is not enough: a sample can look right and still fail, for instance when the processor rejects a declaration, or when a type match picks another member than the one the page claims.
+
+. Pick the project module that already runs the library for real: the integration `tests` module of a code generator, or any module that depends on the library.
+. Create a temporary package in it, such as `<base package>.doccheck`, in `commonMain` (or `main`).
+. Copy every non-trivial sample in it, adding the minimal stub classes they need.
+Rename what clashes, and keep each sample otherwise as the page writes it.
+. For every behaviour a page claims — what is shared, what is built when, what the generated signature is — add an assertion in a test of that package, in `commonTest` (or `test`).
+. Run the narrowest task that compiles and runs it:
++
+[source,sh]
+----
+./gradlew :tests:jvmTest --tests '<base package>.doccheck.*'
+----
+. For a code generator, read the generated sources under `build/generated/ksp` and compare each signature with the one the page shows.
+. Fix the pages, not the samples, until everything passes.
+. Delete the temporary package, and check that `git status` only lists files under `doc/`.
+
+A sample that fails to compile is reported with the processor's or compiler's message, and the fix goes into the page.
+A sample from the README that turns out to be wrong is reported to the user, since the README needs the same fix.
+
+
+== 2. Parse every page
+
+[source,sh]
+----
+cd doc/modules
+for f in */pages/*.adoc; do
+  asciidoctor -a version=x \
+    --failure-level=WARN -v -o /dev/null "$f" 2>&1 \
+    | grep -v "possible invalid reference" | sed "s|^|$f: |"
+done
+----
+
+Add a `-a name=x` for each attribute of `antora.yml`.
+Cross-module xrefs cannot be resolved outside Antora, which is why `possible invalid reference` is filtered out here and checked by the next step instead.
+
+
+== 3. Build the component
+
+Write a throwaway playbook in the scratchpad directory, never in the repository:
+
+[source,yaml]
+----
+site:
+  title: Doc check
+content:
+  sources:
+    - url: /absolute/path/to/the/repository
+      branches: HEAD
+      start_path: doc
+ui:
+  bundle:
+    url: https://github.com/kosi-libs/documentation-ui/raw/kosi/build/ui-bundle-v1.4.2.zip
+runtime:
+  log:
+    level: warn
+    failure_level: warn
+output:
+  dir: ./site
+----
+
+* `branches: HEAD` builds the working tree, uncommitted and untracked files included.
+* `failure_level: warn` makes any broken xref, missing page or unknown attribute fail the build.
+
+[source,sh]
+----
+npx -y antora@3.1.10 playbook.yml
+----
+
+A silent run means success.
+Then check in the output that attributes rendered: `grep` a generated page for the library version, and for any `{` left over from an unresolved attribute.

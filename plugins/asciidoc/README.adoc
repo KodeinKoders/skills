@@ -9,10 +9,17 @@ Kodein's house rules for writing and structuring AsciiDoc documentation.
 
 == What
 
-One skill, `kodein-asciidoc-writing`.
-It covers the document header and attributes, one-sentence-per-line prose, heading levels and anchors, source blocks with callouts, admonitions, lists, tables and cross-references.
+Two skills:
 
+`kodein-asciidoc-writing`::
+The syntax rules for any `.adoc` file.
+It covers the document header and attributes, one-sentence-per-line prose, heading levels and anchors, source blocks with callouts, admonitions, lists, tables and cross-references.
 A companion `references/snippets.adoc` holds copy-paste templates for each construct, so it is read only when one is needed.
+
+`kodein-antora-documentation`::
+The structure of a library's Antora documentation site.
+It covers the `doc/` component layout, `antora.yml` and the version attributes the release checks require, the nav files, the simple-to-complex page progression, one page per context, and samples that compile.
+Two companions hold the page templates (`references/templates.adoc`) and the checking procedure (`references/verification.adoc`): compiling the samples against the library, and building the component with Antora.
 
 
 == Why
@@ -22,7 +29,11 @@ Without a written rule set, each document drifts towards whatever its author rem
 
 More to the point, AsciiDoc has traps that fail silently.
 A single backtick before an apostrophe (`+`Header`'s+`) renders with no code formatting at all and no error, and a line that starts with a space becomes a preformatted block.
-The skill encodes the ones that actually bite, so they are avoided rather than discovered in the rendered output.
+The writing skill encodes the ones that actually bite, so they are avoided rather than discovered in the rendered output.
+
+Antora adds silent failures of its own.
+An xref to an automatic heading ID misses it, since Antora keeps the `_my_section` form, and a sample copied from a stale README documents an API that no longer exists.
+The documentation skill gives every Kodein library the same structure, and has the compiler and an Antora build check the pages before they ship.
 
 
 == How
@@ -32,5 +43,6 @@ The skill encodes the ones that actually bite, so they are avoided rather than d
 claude plugin install asciidoc@kodein
 ----
 
-Claude loads it on its own whenever you create or modify a `.adoc` file, convert Markdown to AsciiDoc, or ask about Asciidoctor formatting and conventions.
+Claude loads the writing skill on its own whenever you create or modify a `.adoc` file, convert Markdown to AsciiDoc, or ask about Asciidoctor formatting and conventions.
+It loads the documentation skill, alongside the writing one, when you ask it to create or extend a library's documentation, or touch an `antora.yml` or a `nav.adoc`.
 There is nothing to invoke by hand.
