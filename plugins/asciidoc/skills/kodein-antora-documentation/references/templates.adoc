@@ -260,7 +260,7 @@ For a KSP-based library, add right after the artifact table:
 [source,adoc]
 ----
 IMPORTANT: Lib runs on KSP but does not install it in your project.
-The KSP version to use depends on the Kotlin version you are using, so it is your responsibility to apply it alongside Lib.
+It is your responsibility to apply a KSP release that supports the Kotlin version you are using alongside Lib.
 ----
 
 And end the page with a `== What gets generated` section listing each generated declaration, its name and where it lands.

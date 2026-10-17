@@ -126,7 +126,8 @@ Each page only relies on the ones before it.
 - **A behaviour that surprises gets a `WARNING`, and only after it is verified** — run it, do not infer it.
 - **Document what the user writes and calls.**
   Internal or generated implementation classes are only mentioned to say they must not be used.
-- A library built on KSP says, in an `IMPORTANT` admonition on its setup page, that it does not apply KSP itself and that the KSP version must match the Kotlin version.
+- A library built on KSP says, in an `IMPORTANT` admonition on its setup page, that it does not apply KSP itself and that the user must apply a KSP release that supports their Kotlin version.
+  KSP is versioned independently of Kotlin since 2.3 (Kotlin 2.4 works with KSP 2.3.x), so the page never says that the two versions must be equal.
 - Address the reader as "you", in the present tense.
 
 ## 7. The README
